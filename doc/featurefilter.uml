@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_VtUN4AIuEeGZS6ybBA-8zg">
+  <packagedElement xmi:type="uml:Actor" xmi:id="_YebDkAIuEeGZS6ybBA-8zg" name="Actor"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_div5EAIuEeGZS6ybBA-8zg" name="Cluster Features"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_mEJ5cAIuEeGZS6ybBA-8zg" memberEnd="_mEJ5cQIuEeGZS6ybBA-8zg _mEKgggIuEeGZS6ybBA-8zg" navigableOwnedEnd="_mEKgggIuEeGZS6ybBA-8zg">
+    <ownedEnd xmi:id="_mEJ5cQIuEeGZS6ybBA-8zg" name="src" type="_YebDkAIuEeGZS6ybBA-8zg" association="_mEJ5cAIuEeGZS6ybBA-8zg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mEKggQIuEeGZS6ybBA-8zg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mEKggAIuEeGZS6ybBA-8zg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_mEKgggIuEeGZS6ybBA-8zg" name="dst" type="_div5EAIuEeGZS6ybBA-8zg" association="_mEJ5cAIuEeGZS6ybBA-8zg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mELHkAIuEeGZS6ybBA-8zg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_mEKggwIuEeGZS6ybBA-8zg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_mzS3YAIuEeGZS6ybBA-8zg" name="Get details of a cluster"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_qmkUsAIuEeGZS6ybBA-8zg" memberEnd="_qmk7wAIuEeGZS6ybBA-8zg _qmk7wwIuEeGZS6ybBA-8zg" navigableOwnedEnd="_qmk7wwIuEeGZS6ybBA-8zg">
+    <ownedEnd xmi:id="_qmk7wAIuEeGZS6ybBA-8zg" name="src" type="_YebDkAIuEeGZS6ybBA-8zg" association="_qmkUsAIuEeGZS6ybBA-8zg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qmk7wgIuEeGZS6ybBA-8zg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qmk7wQIuEeGZS6ybBA-8zg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_qmk7wwIuEeGZS6ybBA-8zg" name="dst" type="_mzS3YAIuEeGZS6ybBA-8zg" association="_qmkUsAIuEeGZS6ybBA-8zg">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_qmli0QIuEeGZS6ybBA-8zg" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qmli0AIuEeGZS6ybBA-8zg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_UJq0YAIvEeGZS6ybBA-8zg" name="MarkerCluster">
+    <ownedOperation xmi:id="_eop7wAIvEeGZS6ybBA-8zg" name="cluster" isStatic="true">
+      <ownedParameter xmi:id="_e0exQAIvEeGZS6ybBA-8zg" direction="return"/>
+      <ownedParameter xmi:id="_e0fYUAIvEeGZS6ybBA-8zg" name="point"/>
+      <ownedParameter xmi:id="_e0fYUQIvEeGZS6ybBA-8zg" name="bbox"/>
+      <ownedParameter xmi:id="_e0f_YAIvEeGZS6ybBA-8zg" name="size"/>
+      <ownedParameter xmi:id="_e0f_YQIvEeGZS6ybBA-8zg" name="radius"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_nmpKcAIvEeGZS6ybBA-8zg" name="getHaversineDistance" isStatic="true">
+      <ownedParameter xmi:id="_nxfvkAIvEeGZS6ybBA-8zg" direction="return"/>
+      <ownedParameter xmi:id="_nxfvkQIvEeGZS6ybBA-8zg" name="lat1"/>
+      <ownedParameter xmi:id="_nxfvkgIvEeGZS6ybBA-8zg" name="lon1"/>
+      <ownedParameter xmi:id="_nxgWoAIvEeGZS6ybBA-8zg" name="lat2"/>
+      <ownedParameter xmi:id="_nxgWoQIvEeGZS6ybBA-8zg" name="lon2"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_q48osAIvEeGZS6ybBA-8zg" name="getCentroid" isStatic="true">
+      <ownedParameter xmi:id="_rFLG0AIvEeGZS6ybBA-8zg" direction="return"/>
+      <ownedParameter xmi:id="_rFLG0QIvEeGZS6ybBA-8zg" name="points"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3y9BAAIvEeGZS6ybBA-8zg" name="CenterOfMass">
+    <ownedOperation xmi:id="_48HogAIvEeGZS6ybBA-8zg" name="fromLatLon" isStatic="true">
+      <ownedParameter xmi:id="_5-iHwAIvEeGZS6ybBA-8zg" direction="return"/>
+      <ownedParameter xmi:id="_5-iHwQIvEeGZS6ybBA-8zg" name="points"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="__ZLLgAIvEeGZS6ybBA-8zg" name="getX" isStatic="true">
+      <ownedParameter xmi:id="__m6skAIvEeGZS6ybBA-8zg" direction="return"/>
+      <ownedParameter xmi:id="__m7ToAIvEeGZS6ybBA-8zg" name="lat"/>
+      <ownedParameter xmi:id="__m7ToQIvEeGZS6ybBA-8zg" name="lon"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_Bfgl4AIwEeGZS6ybBA-8zg" name="getY" isStatic="true">
+      <ownedParameter xmi:id="_BoNO4AIwEeGZS6ybBA-8zg" direction="return"/>
+      <ownedParameter xmi:id="_BoNO4QIwEeGZS6ybBA-8zg" name="lat"/>
+      <ownedParameter xmi:id="_BoN18AIwEeGZS6ybBA-8zg" name="lon"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_DR37YAIwEeGZS6ybBA-8zg" name="getZ" isStatic="true">
+      <ownedParameter xmi:id="_Dbi0wAIwEeGZS6ybBA-8zg" direction="return"/>
+      <ownedParameter xmi:id="_Dbjb0AIwEeGZS6ybBA-8zg" name="lat"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_Fr9_QAIwEeGZS6ybBA-8zg" name="getXYZ" isStatic="true">
+      <ownedParameter xmi:id="_FytgcAIwEeGZS6ybBA-8zg" direction="return"/>
+      <ownedParameter xmi:id="_FyuHgAIwEeGZS6ybBA-8zg" name="lat"/>
+      <ownedParameter xmi:id="_FyuHgQIwEeGZS6ybBA-8zg" name="lon"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_HQJu0AIwEeGZS6ybBA-8zg" name="getLatLon" visibility="public" isStatic="true">
+      <ownedParameter xmi:id="_HXj-YAIwEeGZS6ybBA-8zg" direction="return"/>
+      <ownedParameter xmi:id="_HXj-YQIwEeGZS6ybBA-8zg" name="x"/>
+      <ownedParameter xmi:id="_HXklcAIwEeGZS6ybBA-8zg" name="y"/>
+      <ownedParameter xmi:id="_HXklcQIwEeGZS6ybBA-8zg" name="z"/>
+    </ownedOperation>
+  </packagedElement>
+</uml:Model>
