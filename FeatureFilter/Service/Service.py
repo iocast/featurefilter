@@ -49,8 +49,12 @@ class Service(object):
                 return points
         
         for feature in self.dom.xpath('''//*[local-name() = '%s']''' % params['typename'], namespaces = self.dom.nsmap):
-            coordinate = feature.xpath('''.//*[local-name() = 'coordinates']''', namespaces = self.dom.nsmap)[0]
-            coordinates = coordinate.text.split(coordinate.attrib['cs'])
+            point = feature.xpath('''.//*[local-name() = 'Point']''', namespaces = self.dom.nsmap)[0]
+            coordinate = point.getchildren()[0]
+            if "cs" in coordinate.attrib:
+                coordinates = coordinate.text.split(coordinate.attrib['cs'])
+            else:
+                coordinates = coordinate.text.split(" ")
             points.append({'id':feature.attrib['fid'],
                            'lat':coordinates[0],
                            'lon':coordinates[1]})
