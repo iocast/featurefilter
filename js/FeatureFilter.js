@@ -98,6 +98,11 @@ var FeatureFilter = Class.extend({
 	construct : function(map, imageHandler) {
 		this.map = map;
 		this.imageHandler = imageHandler;
+		
+		if(typeof this.map.tooltips === "undefined") {
+			this.map.tooltips = new Array();
+		}
+		
 	},
 	addLayer : function(layer, html, footer, featureServer, typeName, idAttribute, clusterLabel, clusterDelimiter, clusterHTML, clusterAmount, navigation, clusterAmount) {
 		if(typeof(layer.styleMap) != 'undefined') {
@@ -149,34 +154,35 @@ var FeatureFilter = Class.extend({
 			hover : false,
 			toggle : true,
 			highlightOnly: false,
-			tooltipDiv : null,
 			multiple : false,
+			featureFilter : this,
 			callbacks : {
 				over : function(feature) {
 					var regex = new RegExp(/\$\{([^}]+)\}/);
 					var match = null;
 					
-					this.tooltipDiv = document.createElement('div');
+					var tooltipDiv = document.createElement('div');
 					style = document.createAttribute('style');
 					style.nodeValue = 'z-index: 3000;position:absolute;left:'+(mouseX+10)+'px;top:'+(mouseY+10)+'px;background-color:#FFFFCC;border:1px solid #BBBBBB;padding:1px;';
-					this.tooltipDiv.setAttributeNode(style);
+					tooltipDiv.setAttributeNode(style);
 					if(feature.attributes.name.length > 0) {
-						this.tooltipDiv.innerHTML = (feature.attributes.name == "None") ? "<p>No Name</p>" :	"<p>"+feature.attributes.name+"</p>";
+						tooltipDiv.innerHTML = (feature.attributes.name == "None") ? "<p>No Name</p>" :	"<p>"+feature.attributes.name+"</p>";
 					} else {
-						this.tooltipDiv.innerHTML = "<p>" + eval(regex.exec(clusterAmount)[1]) + " features in this cluster</p>";
+						tooltipDiv.innerHTML = "<p>" + eval(regex.exec(clusterAmount)[1]) + " features in this cluster</p>";
 					}
-					document.body.appendChild(this.tooltipDiv);
+					document.body.appendChild(tooltipDiv);
+					this.map.tooltips[feature.fid] = tooltipDiv;
 				},
 				out : function(feature) {
-					if(this.tooltipDiv != null) {
-						document.body.removeChild(this.tooltipDiv);
-						this.tooltipDiv = null;
+					if(feature.fid in this.map.tooltips) {
+						document.body.removeChild(this.map.tooltips[feature.fid]);
+						delete this.map.tooltips[feature.fid];
 					}
 				},
 				click : function(feature) {
-					if(this.tooltipDiv != null) {
-						document.body.removeChild(this.tooltipDiv);
-						this.tooltipDiv = null;
+					if(feature.fid in this.map.tooltips) {
+						document.body.removeChild(this.map.tooltips[feature.fid]);
+						delete this.map.tooltips[feature.fid];
 					}
 					this.clickFeature(feature);
 				}
@@ -310,6 +316,16 @@ var FeatureFilter = Class.extend({
 		});
 		this.map.addControl(selectControl);
 		selectControl.activate();
+	},
+	closeEverything : function() {
+		for(var index in this.map.popups) {
+			this.map.removePopup(this.map.popups[index]);
+		}
+		
+		for(var key in this.map.tooltips) {
+			document.body.removeChild(this.map.tooltips[key]);
+			delete this.map.tooltips[key];
+		}
 	},
 });
 
