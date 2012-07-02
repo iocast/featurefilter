@@ -7,6 +7,7 @@ from unicodedata import normalize
 import os, urllib, re
 from lxml import etree
 import urllib2
+from twisted.test.test_threadable import threading
 
 class Collator(object):
     
@@ -75,30 +76,8 @@ class Collator(object):
                         ''' '''
     
     def addSymbolToJavaScript(self, file, key, value, img):
+        lock = threading.Lock()
         fro = open(file, 'rb')
         
-        line = fro.readline()
-        seekpoint = fro.tell()
-        while line:
-            
-            if line.find("getSymbols : function() {") >= 0:
-                frw = open(file, 'r+b')
-                frw.seek(seekpoint, 0)
-                
-                frw.writelines("""\t\tthis.symbols.push(["%s", "%s", OpenLayers.Filter.Comparison.EQUAL_TO, this.path + "/%s"]);\n""" % (key, value, img))
-                
-                chars = fro.readlines()
-                while chars:
-                    frw.writelines(chars)
-                    chars = fro.readline()
-                
-                
-                frw.truncate()
-                frw.close()
-                break
-            
-            line = fro.readline()
-            seekpoint = fro.tell()
-            
-        fro.close()
+        jsFileWriter = JSFileWriter(fro, key, value, img, lock)
         
