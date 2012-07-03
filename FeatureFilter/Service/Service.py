@@ -93,12 +93,13 @@ class Service(object):
             del featureCopy['id']
         
         for child in node[0]:
-            localname = child.xpath('local-name()')
-            if localname == 'Point':
-                child[0].text = str(feature['lat']) + child[0].attrib['cs'] + str(feature['lon'])
+            # found out if child consist geometry
+            if len(child.xpath(".//*[local-name() = 'Point']")) > 0:
+                child[0][0].text = str(feature['lat']) + child[0][0].attrib['cs'] + str(feature['lon'])
                 del featureCopy['lat']
                 del featureCopy['lon']
             else:
+                localname = child.xpath('local-name()')
                 if localname in feature:
                     child.text = feature[localname]
                     del featureCopy[localname]
