@@ -1,2 +1,2 @@
-featurefilter
+FeatureFilter
 =============
